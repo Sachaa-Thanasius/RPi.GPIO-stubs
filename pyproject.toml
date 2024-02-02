@@ -1,0 +1,102 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RPi.GPIO-stubs"
+version = "0.7.0"
+description = "Type stubs for RPi.GPIO."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+keywords = ["types", "stubs", "rpi", "raspberry-pi"]
+authors = [{ name = "Sachaa-Thanasius", email = "111999343+Sachaa-Thanasius@users.noreply.github.com" }]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+]
+dependencies = ["typing_extensions>=4.5,<5"]
+
+[project.optional-dependencies]
+dev = ["ruff", "pyright"]
+
+[project.urls]
+Homepage = "https://github.com/Sachaa-Thanasius/RPi.GPIO-stubs"
+Repository = "https://github.com/Sachaa-Thanasius/RPi.GPIO-stubs"
+"Bug Tracker" = "https://github.com/Sachaa-Thanasius/RPi.GPIO-stubs/issues"
+
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+
+[tool.ruff.lint]
+select = [
+    "F",
+    "E",
+    "I",
+    "UP",
+    "YTT",
+    "ANN",
+    "S",
+    "BLE",
+    "B",
+    "A",
+    "COM",
+    "C4",
+    "DTZ",
+    "EM",
+    "ISC",
+    "G",
+    "INP",
+    "PIE",
+    "T20",
+    "Q003",
+    "RSE",
+    "RET",
+    "SIM",
+    "TID",
+    "PTH",
+    "ERA",
+    "PD",
+    "PLC",
+    "PLE",
+    "PLR",
+    "PLW",
+    "TRY",
+    "NPY",
+    "RUF",
+    "PYI",
+]
+ignore = [
+    "ANN101", # Type of self is implied.
+    "ANN102", # Type of cls is implied.
+    "ANN401", # Need Any for args and kwargs.
+    "PLR",    # Complexity things.
+    # Leaving docstrings and defaults in for language servers to see:
+    # https://microsoft.github.io/pyright/#/typed-libraries?id=inlined-type-annotations-and-type-stubs
+    "PYI021",
+    # Recommended by ruff when using ruff format.
+    "COM812",
+    "COM819",
+    "E501",
+    "ISC001",
+    "Q003",
+]
+unfixable = [
+    "ERA", # Don't want erroneous deletion of comments.
+]
+
+[tool.ruff.lint.isort]
+extra-standard-library = ["typing_extensions"]
+combine-as-imports = true
+
+[tool.pyright]
+include = ["RPi"]
+typeCheckingMode = "strict"
+pythonVersion = "3.8"
