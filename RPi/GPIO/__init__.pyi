@@ -5,25 +5,25 @@ from typing import Final, Literal
 from typing_extensions import TypeAlias
 
 _Callback: TypeAlias = Callable[[int], object]
-VERSION: Final[str] = ...
+VERSION: Final[str]
 
-HIGH: Final[Literal[1]] = ...
-LOW: Final[Literal[0]] = ...
-OUT: Final[Literal[0]] = ...
-IN: Final[Literal[1]] = ...
-HARD_PWM: Final[Literal[43]] = ...
-SERIAL: Final[Literal[40]] = ...
-I2C: Final[Literal[42]] = ...
-SPI: Final[Literal[41]] = ...
-UNKNOWN: Final[Literal[-1]] = ...
-BOARD: Final[Literal[10]] = ...
-BCM: Final[Literal[11]] = ...
-PUD_OFF: Final[Literal[20]] = ...
-PUD_UP: Final[Literal[22]] = ...
-PUD_DOWN: Final[Literal[21]] = ...
-RISING: Final[Literal[31]] = ...
-FALLING: Final[Literal[32]] = ...
-BOTH: Final[Literal[33]] = ...
+HIGH: Final[Literal[1]]
+LOW: Final[Literal[0]]
+OUT: Final[Literal[0]]
+IN: Final[Literal[1]]
+HARD_PWM: Final[Literal[43]]
+SERIAL: Final[Literal[40]]
+I2C: Final[Literal[42]]
+SPI: Final[Literal[41]]
+UNKNOWN: Final[Literal[-1]]
+BOARD: Final[Literal[10]]
+BCM: Final[Literal[11]]
+PUD_OFF: Final[Literal[20]]
+PUD_UP: Final[Literal[22]]
+PUD_DOWN: Final[Literal[21]]
+RISING: Final[Literal[31]]
+FALLING: Final[Literal[32]]
+BOTH: Final[Literal[33]]
 
 def setup(
     channel: int | list[int] | tuple[int, ...],
@@ -56,7 +56,7 @@ def cleanup(channel: int | list[int] | tuple[int, ...] | None = None) -> None:
 
 def output(
     channel: int | list[int] | tuple[int, ...],
-    value: int | bool | list[int | bool] | tuple[int | bool, ...],
+    value: Literal[0, 1] | bool | list[Literal[0, 1] | bool] | tuple[Literal[0, 1] | bool, ...],
     /,
 ) -> None:
     """Output to a GPIO channel or list of channels.
@@ -79,7 +79,7 @@ def input(channel: int, /) -> int:  # noqa: A001
 
     Returns
     -------
-    :class:`int`:
+    :class:`int`
         HIGH=1=True or LOW=0=False
     """
 
@@ -133,6 +133,11 @@ def event_detected(channel: int, /) -> bool:
     ----------
     channel: :class:`int`
         Either board pin number or BCM number depending on which mode is set.
+
+    Returns
+    -------
+    :class:`bool`
+        Whether the edge occurred for the given GPIO.
     """
 
 def add_event_callback(gpio: int, callback: _Callback) -> None:
@@ -159,6 +164,11 @@ def wait_for_edge(channel: int, edge: int, bouncetime: int = -666, timeout: int 
         Time allowed between calls to allow for switchbounce. Defaults to -666, which means no time.
     timeout: :class:`int`, default=-1
         Timeout in ms. Defaults to -1, which means no time.
+    
+    Returns
+    -------
+    :class:`int` | None
+        The edge's channel number or None on timeout.
     """
 
 def gpio_function(channel: int, /) -> int:
@@ -168,17 +178,24 @@ def gpio_function(channel: int, /) -> int:
     ----------
     channel: :class:`int`
         Either board pin number or BCM number depending on which mode is set.
+    
+    Returns
+    -------
+    :class:`int`
+        The function for the given GPIO.
     """
 
 def setwarnings(state: int, /) -> None:
     """Enable or disable warning messages.
 
+    Parameters
+    ----------
     state: :class:`int`
         0 to disable, 1 to enable. Enabled by default without calling this function.
     """
 
 class PWM:
-    """Pulse Width Modulation class"""
+    """Pulse Width Modulation class."""
     def __init__(self, channel: int, frequency: float, /) -> None: ...
     def start(self, dutycycle: float) -> None:
         """Start software PWM.
@@ -192,6 +209,8 @@ class PWM:
     def ChangeDutyCycle(self, dutycycle: float, /) -> None:
         """Change the duty cycle.
 
+        Parameters
+        ----------
         dutycycle: :class:`float`
             The new duty cycle (0.0 to 100.0).
         """
@@ -199,9 +218,11 @@ class PWM:
     def ChangeFrequency(self, frequency: float, /) -> None:
         """Change the frequency.
 
+        Parameters
+        ----------
         frequency: :class:`float`
             Frequency in Hz (freq > 1.0).
         """
 
     def stop(self) -> None:
-        """Stop software PWM"""
+        """Stop software PWM."""
