@@ -35,13 +35,13 @@ def setup(
 
     Parameters
     ----------
-    channel: :class:`int` | list[:class:`int`] | tuple[:class:`int`, ...]
+    channel: int | list[int] | tuple[int, ...]
         Either board pin number or BCM number depending on which mode is set.
     direction: Literal[0, 1]
         IN or OUT, 1 or 0 respectively.
-    pull_up_down: :class:`int`, default=20
+    pull_up_down: int, default=20
         20, 21, or 22, corresponding to PUD_OFF (default), PUD_UP or PUD_DOWN.
-    initial: :class:`int`, default=-1
+    initial: int, default=-1
         Initial value for an output channel.
     """
 
@@ -50,7 +50,7 @@ def cleanup(channel: int | list[int] | tuple[int, ...] | None = None) -> None:
 
     Arguments
     ---------
-    channel: :class:`int` | list[int] | tuple[int, ...] | None, optional
+    channel: int | list[int] | tuple[int, ...] | None, optional
         Individual channel or list/tuple of channels to clean up. The default cleans every channel that has been used.
     """
 
@@ -63,9 +63,9 @@ def output(
 
     Arguments
     ---------
-    channel: :class:`int` | list[:class:`int`] | tuple[:class:`int`, ...]
+    channel: int | list[int] | tuple[int, ...]
         Either board pin number or BCM number depending on which mode is set.
-    value: Literal[0, 1] | :class:`bool` | list[:class:`int` | :class:`bool`] | tuple[:class:`int` | :class:`bool`, ...]
+    value: Literal[0, 1] | bool | list[int | bool] | tuple[int | bool, ...]
         0/1 or False/True or LOW/HIGH.
     """
 
@@ -74,12 +74,12 @@ def input(channel: int, /) -> int:  # noqa: A001
 
     Parameters
     ----------
-    channel: :class:`int`
+    channel: int
         Either board pin number or BCM number depending on which mode is set.
 
     Returns
     -------
-    :class:`int`
+    int
         HIGH=1=True or LOW=0=False
     """
 
@@ -98,7 +98,7 @@ def getmode() -> int | None:
 
     Returns
     -------
-    :class:`int` | None
+    int | None
         Returns 10 (GPIO.BOARD), 11 (GPIO.BCM), or None.
     """
 
@@ -107,13 +107,13 @@ def add_event_detect(gpio: int, edge: int, callback: _Callback | None = None, bo
 
     Parameters
     ----------
-    channel: :class:`int`
+    channel: int
         Either board pin number or BCM number depending on which mode is set.
-    edge: :class:`int`
+    edge: int
         GPIO.RISING, GPIO.FALLING or GPIO.BOTH.
     callback: Callable[[int], object], optional
         A callback function for the event (optional).
-    bouncetime: :class:`int`, default=-666
+    bouncetime: int, default=-666
         Switch bounce timeout in ms for callback.
     """
 
@@ -122,7 +122,7 @@ def remove_event_detect(channel: int, /) -> None:
 
     Parameters
     ----------
-    channel: :class:`int`
+    channel: int
         Either board pin number or BCM number depending on which mode is set.
     """
 
@@ -131,12 +131,12 @@ def event_detected(channel: int, /) -> bool:
 
     Parameters
     ----------
-    channel: :class:`int`
+    channel: int
         Either board pin number or BCM number depending on which mode is set.
 
     Returns
     -------
-    :class:`bool`
+    bool
         Whether the edge occurred for the given GPIO.
     """
 
@@ -145,7 +145,7 @@ def add_event_callback(gpio: int, callback: _Callback) -> None:
 
     Parameters
     ----------
-    channel: :class:`int`
+    channel: int
         Either board pin number or BCM number depending on which mode is set.
     callback: Callable[[int], object]
         A callback function.
@@ -156,18 +156,18 @@ def wait_for_edge(channel: int, edge: int, bouncetime: int = -666, timeout: int 
 
     Parameters
     ----------
-    channel: :class:`int`
+    channel: int
         Either board pin number or BCM number depending on which mode is set.
-    edge: :class:`int`
+    edge: int
         31/GPIO.RISING, 32/GPIO.FALLING or 33/GPIO.BOTH.
-    bouncetime: :class:`int`, default=-666
+    bouncetime: int, default=-666
         Time allowed between calls to allow for switchbounce. Defaults to -666, which means no time.
-    timeout: :class:`int`, default=-1
+    timeout: int, default=-1
         Timeout in ms. Defaults to -1, which means no time.
-    
+
     Returns
     -------
-    :class:`int` | None
+    int | None
         The edge's channel number or None on timeout.
     """
 
@@ -176,12 +176,12 @@ def gpio_function(channel: int, /) -> int:
 
     Parameters
     ----------
-    channel: :class:`int`
+    channel: int
         Either board pin number or BCM number depending on which mode is set.
-    
+
     Returns
     -------
-    :class:`int`
+    int
         The function for the given GPIO.
     """
 
@@ -190,7 +190,7 @@ def setwarnings(state: int, /) -> None:
 
     Parameters
     ----------
-    state: :class:`int`
+    state: int
         0 to disable, 1 to enable. Enabled by default without calling this function.
     """
 
@@ -202,7 +202,7 @@ class PWM:
 
         Parameters
         ----------
-        dutycycle: :class:`float`
+        dutycycle: float
             The duty cycle (0.0 to 100.0).
         """
 
@@ -211,7 +211,7 @@ class PWM:
 
         Parameters
         ----------
-        dutycycle: :class:`float`
+        dutycycle: float
             The new duty cycle (0.0 to 100.0).
         """
 
@@ -220,7 +220,7 @@ class PWM:
 
         Parameters
         ----------
-        frequency: :class:`float`
+        frequency: float
             Frequency in Hz (freq > 1.0).
         """
 
