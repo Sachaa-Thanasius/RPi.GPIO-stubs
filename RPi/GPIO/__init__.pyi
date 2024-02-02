@@ -1,10 +1,21 @@
-"""GPIO functionality of a Raspberry Pi using Python."""
+"""This package provides a Python module to control the GPIO on a Raspberry Pi."""
 
 from collections.abc import Callable
-from typing import Final, Literal
+from typing import Final, Literal, TypedDict
 from typing_extensions import TypeAlias
 
 _Callback: TypeAlias = Callable[[int], object]
+
+class _RPiInfo(TypedDict):
+    P1_REVISION: int
+    REVISION: str
+    TYPE: str
+    MANUFACTURER: str
+    PROCESSOR: str
+    RAM: str
+
+RPI_INFO: _RPiInfo
+RPI_VERSION: Final[int]
 VERSION: Final[str]
 
 HIGH: Final[Literal[1]]
