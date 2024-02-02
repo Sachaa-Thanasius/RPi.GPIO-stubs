@@ -57,7 +57,8 @@ def setup(
     """
 
 def cleanup(channel: int | list[int] | tuple[int, ...] | None = None) -> None:
-    """Clean up by resetting all GPIO channels that have been used by this program to INPUT with no pullup/pulldown and no event detection.
+    """Clean up by resetting all GPIO channels that have been used by this program to INPUT with no pullup/pulldown and
+    no event detection.
 
     Arguments
     ---------
@@ -138,7 +139,9 @@ def remove_event_detect(channel: int, /) -> None:
     """
 
 def event_detected(channel: int, /) -> bool:
-    """Returns True if an edge has occurred on a given GPIO. You need to enable edge detection using add_event_detect() first.
+    """Returns True if an edge has occurred on a given GPIO.
+
+    You need to enable edge detection using add_event_detect() first.
 
     Parameters
     ----------
