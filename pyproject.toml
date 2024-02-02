@@ -76,8 +76,6 @@ select = [
 ignore = [
     "ANN101", # Type of self is implied.
     "ANN102", # Type of cls is implied.
-    "ANN401", # Need Any for args and kwargs.
-    "PLR",    # Complexity things.
     # Leaving docstrings and defaults in for language servers to see:
     # https://microsoft.github.io/pyright/#/typed-libraries?id=inlined-type-annotations-and-type-stubs
     "PYI021",
@@ -100,3 +98,4 @@ combine-as-imports = true
 include = ["RPi"]
 typeCheckingMode = "strict"
 pythonVersion = "3.8"
+reportUnnecessaryTypeIgnoreComment = "warning"
