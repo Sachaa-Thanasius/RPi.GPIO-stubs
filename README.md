@@ -12,6 +12,6 @@ pip install https://github.com/Sachaa-Thanasius/RPi.GPIO-stubs
 ```
 
 
-# Note
+## Note
 
 Most of this has been pushed upstream to [typeshed](https://github.com/python/typeshed/blob/main/stubs/RPi.GPIO/RPi/GPIO/__init__.pyi), but this may provide some use due to the included docstrings.
