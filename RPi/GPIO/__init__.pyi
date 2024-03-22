@@ -18,23 +18,24 @@ RPI_INFO: _RPiInfo
 RPI_VERSION: Final[int]
 VERSION: Final[str]
 
-HIGH: Final[Literal[1]]
-LOW: Final[Literal[0]]
-OUT: Final[Literal[0]]
-IN: Final[Literal[1]]
-HARD_PWM: Final[Literal[43]]
-SERIAL: Final[Literal[40]]
-I2C: Final[Literal[42]]
-SPI: Final[Literal[41]]
-UNKNOWN: Final[Literal[-1]]
-BOARD: Final[Literal[10]]
-BCM: Final[Literal[11]]
-PUD_OFF: Final[Literal[20]]
-PUD_UP: Final[Literal[22]]
-PUD_DOWN: Final[Literal[21]]
-RISING: Final[Literal[31]]
-FALLING: Final[Literal[32]]
-BOTH: Final[Literal[33]]
+OUT: Final = 0
+IN: Final = 1
+HARD_PWM: Final = 43
+SERIAL: Final = 40
+I2C: Final = 42
+SPI: Final = 41
+UNKNOWN: Final = -1
+
+BOARD: Final = 10
+BCM: Final = 11
+
+PUD_OFF: Final = 20
+PUD_UP: Final = 22
+PUD_DOWN: Final = 21
+
+RISING: Final = 31
+FALLING: Final = 32
+BOTH: Final = 33
 
 def setup(
     channel: int | list[int] | tuple[int, ...],
@@ -56,7 +57,7 @@ def setup(
         Initial value for an output channel.
     """
 
-def cleanup(channel: int | list[int] | tuple[int, ...] | None = None) -> None:
+def cleanup(channel: int | list[int] | tuple[int, ...] = -666) -> None:
     """Clean up by resetting all GPIO channels that have been used by this program to INPUT with no pullup/pulldown and
     no event detection.
 
@@ -95,7 +96,7 @@ def input(channel: int, /) -> int:  # noqa: A001
         HIGH=1=True or LOW=0=False
     """
 
-def setmode(mode: int, /) -> None:
+def setmode(mode: Literal[10, 11], /) -> None:
     """Set up numbering mode to use for channels.
 
     Parameters
@@ -105,7 +106,7 @@ def setmode(mode: int, /) -> None:
         11 or GPIO.BCM (uses Broadcom GPIO 00..nn numbers).
     """
 
-def getmode() -> int | None:
+def getmode() -> Literal[10, 11] | None:
     """Get numbering mode used for channel numbers.
 
     Returns
@@ -119,7 +120,7 @@ def add_event_detect(gpio: int, edge: int, callback: _Callback | None = None, bo
 
     Parameters
     ----------
-    channel: int
+    gpio: int
         Either board pin number or BCM number depending on which mode is set.
     edge: int
         GPIO.RISING, GPIO.FALLING or GPIO.BOTH.
@@ -199,12 +200,12 @@ def gpio_function(channel: int, /) -> int:
         The function for the given GPIO.
     """
 
-def setwarnings(state: int, /) -> None:
+def setwarnings(state: bool, /) -> None:
     """Enable or disable warning messages.
 
     Parameters
     ----------
-    state: int
+    state: bool
         0 to disable, 1 to enable. Enabled by default without calling this function.
     """
 
