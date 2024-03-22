@@ -61,8 +61,8 @@ def cleanup(channel: int | list[int] | tuple[int, ...] = -666) -> None:
     """Clean up by resetting all GPIO channels that have been used by this program to INPUT with no pullup/pulldown and
     no event detection.
 
-    Arguments
-    ---------
+    Parameters
+    ----------
     channel: int | list[int] | tuple[int, ...] | None, optional
         Individual channel or list/tuple of channels to clean up. The default cleans every channel that has been used.
     """
